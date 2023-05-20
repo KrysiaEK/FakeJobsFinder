@@ -5,7 +5,7 @@ Hackathon project finding fake job offers in the internet created for #superviso
 This tool aims to effectively identify and eliminate fraudulent job offers, reducing the risk of data theft associated with the acquisition of verified bank accounts and registered SIM cards. It conducts comprehensive analysis of results, generates detailed reports, and ensures the security of source material. The tool is integrated with a mailing server and offers letter templates.
 
 ## Demo:
-Address of demo: jobs.bbarwik.com  
+Address of demo: **jobs.bbarwik.com**  
 Access credentials:  
 >Login: test@test.com  
 >Password: hackathon
@@ -68,9 +68,9 @@ jobs.bbarwik.com/api/v1/docs
   - The tool facilitates the preparation of advertisement removal requests, making the process easier for users. These requests can be easily submitted within the application.
 
 ## Technological Stack:
-The solution is fully containerized. Simply fill in the configuration file and use the `docker-compose up` command. 
-
-Technological Stack: FastAPI, Docker, Celery, Postgres, Python, RabbitMQ, Sentry, Flower, Vue.js.
+- The solution is fully containerized. Simply fill in the configuration file and use the `docker-compose up` command. 
+- Technological Stack: 
+  - FastAPI, Docker, Celery, Postgres, Python, RabbitMQ, Sentry, Flower, Vue.js.
 
 
 # Development:
