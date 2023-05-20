@@ -5,7 +5,7 @@ Hackathon project finding fake job offers in the internet created for #superviso
 This tool aims to effectively identify and eliminate fraudulent job offers, reducing the risk of data theft associated with the acquisition of verified bank accounts and registered SIM cards. It conducts comprehensive analysis of results, generates detailed reports, and ensures the security of source material. The tool is integrated with a mailing server and offers letter templates.
 
 ## Demo:
-Address demo: jobs.bbarwik.com  
+Address of demo: jobs.bbarwik.com  
 Access credentials:  
 >Login: test@test.com  
 >Password: hackathon
