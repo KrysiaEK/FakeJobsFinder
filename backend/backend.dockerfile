@@ -9,6 +9,10 @@ WORKDIR /app/
 # Neomodel has shapely and libgeos as dependencies
 RUN apt-get update && apt-get install -y libgeos-dev
 
+# Install playwright
+RUN apt-get install -y chromium
+RUN pip install playwright && playwright install
+
 # Allow installing dev dependencies to run tests
 ARG INSTALL_DEV=false
 RUN pip install --upgrade setuptools

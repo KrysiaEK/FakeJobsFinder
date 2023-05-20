@@ -163,7 +163,7 @@ services:
       #  condition: on-failure
 
   queue:
-    image: rabbitmq:3
+    image: rabbitmq:3-management
     # Using the below image instead is required to enable the "Broker" tab in the flower UI:
     # image: rabbitmq:3-management
     #
@@ -182,7 +182,7 @@ services:
       - "--broker=amqp://guest@queue:5672//"
       # For the "Broker" tab to work in the flower UI, uncomment the following command argument,
       # and change the queue service's image as well
-      # - "--broker_api=http://guest:guest@queue:15672/api//"
+      - "--broker_api=http://guest:guest@queue:15672/api//"
     deploy:
       labels:
         - traefik.enable=true
