@@ -1,6 +1,79 @@
-# Fake Jobs Finder
+# Fake Job Finder
 
 Hackathon project finding fake job offers in the internet created for #supervison_hack.
+
+This tool aims to effectively identify and eliminate fraudulent job offers, reducing the risk of data theft associated with the acquisition of verified bank accounts and registered SIM cards. It conducts comprehensive analysis of results, generates detailed reports, and ensures the security of source material. The tool is integrated with a mailing server and offers letter templates.
+
+## Demo:
+Address demo: jobs.bbarwik.com  
+Access credentials:  
+>Login: test@test.com  
+>Password: hackathon
+
+Credentials are temporarily disabled to facilitate demo viewing.
+
+## Documentation
+jobs.bbarwik.com/api/v1/docs
+
+## Data Collection: 
+
+### Method: 
+- The tool periodically collects URLs of job offers from various websites, storing them for subsequent processing and analysis. It accesses the job offers, processes them, and performs in-depth evaluation.
+- Implementation of Functionalities and New Services:  
+  - The tool's modular architecture facilitates the integration of new functionalities. 
+  - Adding support for new websites requires minimal coding, typically only around 100 lines.
+- Platform Integration:  
+  - The tool has already been successfully implemented on platforms such as OLX, Oglaszamy24 and Sprzedajemy.pl.
+
+### Data Analysis: 
+- The analysis of collected data utilizes Generative AI, providing numerous advantages, including the ability to train the model and continuously improve its effectiveness.
+- Criteria for Evaluating Job Offers:  
+  - To determine the credibility or potential falsehood of job offers, the tool employs specific criteria and keyword analysis. It also verify if given company apperas in biznes.gov.pl.
+
+- Criteria for evaluating job offers in terms of their credibility and indicating their falsehood:
+  - Criteria suggesting that the advertisement is genuine:
+    - Mentioned company name and information
+    - Presence of the company in biznes.gov.pl
+    - Detailed job description
+    - Stated qualifications requirements
+    - Information about the type of contract
+    - Information about the salary
+    - Description of the recruitment process
+    - Provided contact details
+    - Mention of vacation and sick leave entitlement
+    - Language and style of the advertisement
+
+  - Criteria suggesting that the advertisement is false:
+    - Presence of keywords
+    - Lack of specific company information
+    - Unclear job description
+    - Absence of qualification requirements
+    -	Lack of information about the contract
+    -	Unclear information about the salary
+    -	Unusual/unclear recruitment process
+    -	Suspicious contact details
+    -	Request for fees or personal data at the beginning of the process
+    -	Language and stylistic errors
+    -	Suggestion of high and quick earnings with minimal work, e.g., "Earn big money quickly"
+    -	Utilization of time pressure
+    -	Impression: "Too good to be true"
+
+### Data Management: 
+- The tool efficiently reviews and analyzes advertisements, capturing and storing copies of web pages and essential information such as links, content, dates, and usernames. It saves keywords and the corresponding evaluation results, allowing the analyst to assess risk weight accurately.
+- Report Generation:  
+  - The tool generates comprehensive reports that determine the probability of falsehood and truthfulness for each advertisement. It further categorizes the advertisements based on the evaluation results. Statistical analysis is available at both the individual website level and for comparison between different websites.
+- Filtering and Alert System:  
+  - The tool enables users to filter advertisements by categories, enhancing the efficiency of the search process. Additionally, it incorporates a built-in alert system to promptly notify users of any relevant updates or changes.
+- Offer Removal Request:  
+  - The tool facilitates the preparation of advertisement removal requests, making the process easier for users. These requests can be easily submitted within the application.
+
+## Technological Stack:
+The solution is fully containerized. Simply fill in the configuration file and use the `docker-compose up` command. 
+
+Technological Stack: FastAPI, Docker, Celery, Postgres, Python, RabbitMQ, Sentry, Flower, Vue.js.
+
+
+# Development:
 
 ## Backend Requirements
 
