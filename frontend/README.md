@@ -1,91 +1,70 @@
-# Nuxt.js frontend replacement for FastAPI base project generator
+# Getting Started with Create React App
 
-## What is it?
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Accelerate your next FastAPI Base Project Generator frontend development with NuxtJS, an open source framework making web development simple and powerful.
+## Available Scripts
 
-## Setup
+In the project directory, you can run:
 
-Make sure to install the dependencies:
+### `npm start`
 
-```bash
-# yarn
-yarn install
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-# npm
-npm install
-```
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Development
+### `npm test`
 
-Start the development server on http://localhost:3000
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```bash
-# yarn
-yarn dev
+### `npm run build`
 
-# npm
-npm run dev
-```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Production
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Build the application for production:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```bash
-# yarn 
-yarn build
+### `npm run eject`
 
-# npm
-npm run build
-```
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-Locally preview production build:
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```bash
-#yarn
-yarn preview
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-# npm
-npm run preview
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+## Learn More
 
-## Docker
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-A [Docker](https://www.docker.com/) configuration is also provided. The _Dockerfile_ is divided into four [build stages](https://docs.docker.com/develop/develop-images/multistage-build/):
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-1. `build`:
-   - Copy files from the repo into the Docker container
-   - Install dependencies from _package.json_ with Yarn
-   - Build the Nuxt.js app with [server-side rendering](https://nuxtjs.org/docs/2.x/concepts/server-side-rendering) (SSR) in [standalone mode](https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-build#standalone)
-2. `run-dev`: use the build stage to run the dev server, which can hot-reload within the Docker container if the source code is mounted
-3. `run-start`: use the build stage to run [`nuxt start`](https://nuxtjs.org/docs/2.x/get-started/commands), with all dependencies from the build
-4. `run-minimal`: this image is less than 1/6 the size of the others (262 MB vs. 1.72 GB)
-   - Pull a Node.js image running on Alpine Linux
-   - Copy the built Nuxt.js app from the `build` stage, without `node_modules`
-   - Install `nuxt-start`, with the minimal runtime for Nuxt.js (needed in addition to the inlined dependencies from standalone mode)
-   - Run the `nuxt start` command using the `nuxt-start` module to start the SSR application
+### Code Splitting
 
-**Important note:** The main trade-off for the minimal production build is that any NuxtJS modules declared in the [`modules:` section of the _nuxt.config.js_ file](https://github.com/whythawk/full-stack-fastapi-postgresql/blob/ee12a3ffe3288163c7ce1e20ceae7e694213116d/%7B%7Bcookiecutter.project_slug%7D%7D/frontend/nuxt.config.js#L51-L60) must also be specified in the _Dockerfile_ on the `yarn add` line as shown [here](https://github.com/whythawk/full-stack-fastapi-postgresql/blob/ee12a3ffe3288163c7ce1e20ceae7e694213116d/%7B%7Bcookiecutter.project_slug%7D%7D/frontend/Dockerfile#L22) (it's not installing from the _package.json_, which is one reason why it's smaller). To switch from the minimal production build to the full production build, either specify the [target build stage](https://docs.docker.com/compose/compose-file/compose-file-v3/#target) in the _docker-compose.yml_ (`target: run-start`, as is done for the local development configuration [here](https://github.com/whythawk/full-stack-fastapi-postgresql/blob/ee12a3ffe3288163c7ce1e20ceae7e694213116d/%7B%7Bcookiecutter.project_slug%7D%7D/docker-compose.override.yml#L83-L85)), or push Docker images from each stage to a registry, then specify the appropriate tag to be pulled (with the `TAG` environment variable, as shown [here](https://github.com/whythawk/full-stack-fastapi-postgresql/blob/ee12a3ffe3288163c7ce1e20ceae7e694213116d/%7B%7Bcookiecutter.project_slug%7D%7D/docker-compose.yml#L225-L229)).
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-To work with the Docker configuration:
+### Analyzing the Bundle Size
 
-```sh
-cd /path/to/full-stack-fastapi-postgresql/fake_jobs_finder/frontend
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-# build and run the development environment with hot-reloading
-docker build . --rm --target run-dev -t localhost/whythawk/nuxt-for-fastapi:run-dev
-docker run -it -p 3000:3000 -v $(pwd):/app --env-file $(pwd)/.env localhost/whythawk/nuxt-for-fastapi:run-dev
+### Making a Progressive Web App
 
-# build and run the minimal production environment
-docker build . --rm --target run-minimal -t localhost/whythawk/nuxt-for-fastapi:run-minimal
-docker run --env-file $(pwd)/.env -it -p 3000:3000 localhost/whythawk/nuxt-for-fastapi:run-minimal
-```
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-Then browse to http://localhost:3000 to see the homepage.
+### Advanced Configuration
 
-## Licence
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-This project is licensed under the terms of the MIT license.
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

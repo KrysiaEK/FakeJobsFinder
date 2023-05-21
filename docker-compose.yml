@@ -262,7 +262,6 @@ services:
     image: "${DOCKER_IMAGE_FRONTEND?Variable not set}:${TAG-latest}"
     env_file:
       - .env
-      - ./frontend/.env
     environment:
       - NUXT_HOST=0.0.0.0
       - NUXT_PORT=80

@@ -1,33 +1,46 @@
 {
+  "name": "fake-jobs-finder",
+  "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "start": "node .output/server/index.mjs",
-    "preview": "nuxt preview"
-  },
-  "devDependencies": {
-    "@nuxt/content": "^2.4.3",
-    "@pinia-plugin-persistedstate/nuxt": "^1.0.0",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/line-clamp": "^0.4.2",
-    "@tailwindcss/typography": "^0.5.7",
-    "autoprefixer": "^10.4.13",
-    "nuxt": "^3.0.0",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.1"
-  },
   "dependencies": {
-    "@dicebear/bottts": "^5.3.4",
-    "@dicebear/core": "^5.3.4",
-    "@headlessui/vue": "^1.7.3",
-    "@heroicons/vue": "2.0.12",
-    "@pinia/nuxt": "^0.4.3",
-    "@vee-validate/i18n": "^4.7.3",
-    "@vee-validate/rules": "^4.7.3",
-    "qrcode.vue": "^3.3.3",
-    "vee-validate": "^4.7.3"
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.13.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "html2pdf.js": "^0.10.1",
+    "prop-types": "^15.8.1",
+    "ra-data-json-server": "^4.10.3",
+    "react": "^18.2.0",
+    "react-admin": "^4.10.3",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^2.1.3",
+    "recharts": "^2.6.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

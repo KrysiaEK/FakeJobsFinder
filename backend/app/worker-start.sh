@@ -3,4 +3,4 @@ set -e
 
 python /app/app/celeryworker_pre_start.py
 
-celery -A app.worker worker -l info -c 1 -B -E
+celery -A app.worker worker -l info -c 4 -B -E
