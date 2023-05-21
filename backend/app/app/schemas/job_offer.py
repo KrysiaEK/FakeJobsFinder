@@ -1,31 +1,48 @@
 from typing import Optional
-from datetime import datetime
 from pydantic import BaseModel
+from datetime import datetime
 
+# Shared properties
 class JobOfferBase(BaseModel):
     provider: str
     url: str
     title: str
     description: str
     author: str
-    score: int
+    company: str
     positives: str
     negatives: str
-    keywords: str
+    positive_keywords: str
+    negative_keywords: str
+    score: int
     email_text: str
-    report_pdf: Optional[bytes]
-    website_pdf: Optional[bytes]
-    assigned_score: Optional[int]
+    assigned_score: Optional[int] = None
 
+
+# Properties to receive via API on creation
 class JobOfferCreate(JobOfferBase):
     pass
 
+
+# Properties to receive via API on update
 class JobOfferUpdate(JobOfferBase):
     pass
 
+
+# Properties to return via API
 class JobOffer(JobOfferBase):
     id: int
-    created_at: datetime
+    date: Optional[datetime]
+    created_at: Optional[datetime]
 
     class Config:
         orm_mode = True
+
+
+# Properties stored in DB
+class JobOfferInDB(JobOffer):
+    pass
+
+class JobOfferStats(BaseModel):
+    services: list[dict]
+    

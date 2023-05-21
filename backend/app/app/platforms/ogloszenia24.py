@@ -1,16 +1,16 @@
 from .base import BasePlatform, Browser, OfferDetails
 from datetime import datetime
 
-class Olx(BasePlatform):
+class Ogloszenia24(BasePlatform):
     def get_offers(self, page: int) -> list[str]:
         with Browser() as browser:
-            browser.goto(f'https://www.Olx.pl/praca/?page={page}')    
-            browser.wait_for_load_state('networkidle')
+            browser.goto(f'https://www.oglaszamy24.pl/ogloszenia/praca/oferty-pracy/?std=1&results={page}')    
+            browser.wait_for_load_state('domcontentloaded')
             offers = browser.evaluate("""() => {
                 var elements = document.getElementsByTagName("a");
                 var offers = [];
                 for(var i = 0; i < elements.length; ++i) {
-                    if(elements[i].href && elements[i].href.indexOf('/oferta/praca') >= 0) {
+                    if(elements[i].href && elements[i].href.indexOf('/ogloszenie/') >= 0) {
                         offers.push(elements[i].href);
                     }
                 }
@@ -21,8 +21,8 @@ class Olx(BasePlatform):
     def get_offer(self, url) -> OfferDetails:
         with Browser() as browser:
             browser.goto(url)    
-            
-            browser.wait_for_load_state('networkidle')
+            browser.wait_for_load_state('domcontentloaded')
+            browser.wait_for_selector('div#page_c')
 
             # set resolution
             dimensions = browser.evaluate("""() => {
@@ -35,7 +35,7 @@ class Olx(BasePlatform):
             browser.set_viewport_size = dimensions
         
             # accept cookies
-            browser.evaluate('() => document.getElementById("onetrust-accept-btn-handler").click();')
+            # browser.evaluate('() => document.getElementById("onetrust-accept-btn-handler").click();')
 
             # get offer description
             title = browser.evaluate("""() => {
@@ -44,22 +44,13 @@ class Olx(BasePlatform):
             }""")
 
             user = browser.evaluate("""() => {
-                var user = document.getElementsByTagName("h4");
+                var user = document.getElementsByClassName("std_text_b");
                 return user[0].innerText;        
             }""")
 
             offer_description = browser.evaluate("""() => {
-                var divs = document.getElementsByTagName("div");
-                var description;
-                for(var i = 0; i < divs.length; ++i) {
-                    if(divs[i].innerText.indexOf("OPIS") >= 0) {
-                        var text = divs[i].innerText;
-                        if(!description || description.length > text.length) {
-                            description = text;
-                        }
-                    }
-                }
-                return description;
+                var description = document.getElementById("adv_desc");
+                return description.innerText;        
             }""")
 
             # take screenshot

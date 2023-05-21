@@ -1,16 +1,17 @@
 from .base import BasePlatform, Browser, OfferDetails
 from datetime import datetime
 
-class Olx(BasePlatform):
+class Sprzedajemy(BasePlatform):
     def get_offers(self, page: int) -> list[str]:
         with Browser() as browser:
-            browser.goto(f'https://www.Olx.pl/praca/?page={page}')    
-            browser.wait_for_load_state('networkidle')
+            offset = page * 30
+            browser.goto(f'https://sprzedajemy.pl/praca?offset={offset}')    
+            browser.wait_for_load_state('domcontentloaded')
             offers = browser.evaluate("""() => {
                 var elements = document.getElementsByTagName("a");
                 var offers = [];
                 for(var i = 0; i < elements.length; ++i) {
-                    if(elements[i].href && elements[i].href.indexOf('/oferta/praca') >= 0) {
+                    if(elements[i].href && elements[i].className == 'offerLink') {
                         offers.push(elements[i].href);
                     }
                 }
@@ -20,9 +21,9 @@ class Olx(BasePlatform):
 
     def get_offer(self, url) -> OfferDetails:
         with Browser() as browser:
-            browser.goto(url)    
-            
-            browser.wait_for_load_state('networkidle')
+            browser.goto(url)                
+            browser.wait_for_load_state('domcontentloaded')
+            browser.wait_for_selector('div#offerDetailsBottom')
 
             # set resolution
             dimensions = browser.evaluate("""() => {
@@ -35,31 +36,25 @@ class Olx(BasePlatform):
             browser.set_viewport_size = dimensions
         
             # accept cookies
-            browser.evaluate('() => document.getElementById("onetrust-accept-btn-handler").click();')
+            browser.evaluate("""() => {
+                let el = document.getElementById("didomi-notice-agree-button");
+                if(el) { el.click(); }
+            }""")
 
             # get offer description
             title = browser.evaluate("""() => {
-                var title = document.getElementsByTagName("h1");
-                return title[0].innerText;        
+                var title = document.getElementsByClassName('offerDetailsTop');
+                return title[0].innerText.split('\\n')[0];        
             }""")
 
             user = browser.evaluate("""() => {
-                var user = document.getElementsByTagName("h4");
+                var user = document.getElementsByClassName("name");
                 return user[0].innerText;        
             }""")
 
             offer_description = browser.evaluate("""() => {
-                var divs = document.getElementsByTagName("div");
-                var description;
-                for(var i = 0; i < divs.length; ++i) {
-                    if(divs[i].innerText.indexOf("OPIS") >= 0) {
-                        var text = divs[i].innerText;
-                        if(!description || description.length > text.length) {
-                            description = text;
-                        }
-                    }
-                }
-                return description;
+                var divs = document.getElementsByClassName("offerDescription");
+                return divs[0].innerText;        
             }""")
 
             # take screenshot

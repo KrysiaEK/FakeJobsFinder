@@ -1,6 +1,6 @@
 from .crud_user import user
 from .crud_token import token
-
+from .crud_job_offer import job_offer
 
 # For a new basic set of CRUD operations you could just do
 

@@ -4,7 +4,7 @@ import json
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def request(prompt, message = None) -> dict:
+def request(prompt, message = None, use_json = True) -> dict:
     messages = [
         {'role': 'system', 'content': prompt},
     ]
@@ -16,6 +16,8 @@ def request(prompt, message = None) -> dict:
         temperature = 0
     )
     text = response['choices'][0]['message']["content"]
+    if not use_json:
+        return {'response': text}
     try:
         return json.loads(text)
     except:

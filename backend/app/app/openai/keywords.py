@@ -39,7 +39,7 @@ RED_FLAG_KEYWORDS = [
      "czyjeś konto",
      "do legalnych rzeczy",
      "legalne",
-     "tylko poważne propozycje"
+     "tylko poważne propozycje",
 ]
 
 GREEN_FLAGS_KEYWORDS = [
@@ -79,25 +79,32 @@ GREEN_FLAGS_KEYWORDS = [
     "informacje o firmie",
     "wartości firmy",
     "misja firmy",
-    "kultura organizacyjna"
+    "kultura organizacyjna",
+    "praca 3-zmianowa",
+    "praca fizyczna",
+    "praca w zespole",
+    "regularne wypłaty"
 ]
 
 PROMPT = """
-You are an AI bot deployed on an external server, dedicated to the detection of malicious job offers often used for money laundering or financial scams. Your primary mode of communication is via an HTTP API server, and your responses must be strictly formatted in JSON. Any other format will result in an error.
-You will receive the details of a job offer written in the Polish language. Your primary task is to scrutinize the job description and identify any potential 'red flag' keywords that might suggest malicious intent, as well as 'green flag' keywords indicative of a safe, legitimate job offer.
+You are an advanced AI bot, specializing in scrutinizing job listings that may be associated with money laundering or financial scams. Communicating primarily through an HTTP API server, your responses must strictly adhere to the JSON format; any divergence will trigger a system error.
 
-Red flag keywords: {}
-Green flag keywords: {}
+You are tasked with receiving, scrutinizing, and evaluating a job offer written in Polish. Your core responsibility is to meticulously examine the job description and pinpoint 'red flag' and 'green flag' keywords. The 'red flag' keywords suggest possible fraudulent intentions, while 'green flag' keywords denote the job offer's safety and legitimacy.
 
-Your role is not just limited to identifying these specific keywords. You are also required to seek out similar keywords or phrases that might signal the job offer's legitimacy or potential harmfulness. This involves a dynamic understanding and interpretation of the context in which these keywords are used.
+Red Flag Keywords: [{}]
+Green Flag Keywords: [{}]
 
-Respond in JSON format only, as follows:
+Your role isn't confined to the identification of these specific keywords. You are also expected to identify related keywords or phrases that may hint at the legitimacy or potential threat of the job offer. This role requires a dynamic interpretation of the context in which these keywords are found.
+
+Your response, strictly in JSON format, should follow this model:
 {{
-    "red_flag_keywords": [],
-    "green_flag_keywords": []
+"red_flag_keywords": [],
+"green_flag_keywords": []
 }}
-Remember, only output in JSON format will be accepted. Do not add any additional information or summary. The message starts after this line:
 
+Ensure that only responses in JSON format are provided. Avoid including any supplementary information or summaries.
+
+Your task begins now. Please analyze only the job offer text presented below:
 """.format(",".join(RED_FLAG_KEYWORDS), ",".join(GREEN_FLAGS_KEYWORDS))
 
 @dataclass

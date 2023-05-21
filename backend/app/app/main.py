@@ -6,7 +6,9 @@ from app.core.config import settings
 from app.gdb import NeomodelConfig
 
 app = FastAPI(
-    title=settings.PROJECT_NAME, openapi_url=f"{settings.API_V1_STR}/openapi.json"
+    title=settings.PROJECT_NAME, 
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
+    docs_url=f"{settings.API_V1_STR}/docs"
 )
 
 # Set all CORS enabled origins
@@ -17,6 +19,7 @@ if settings.BACKEND_CORS_ORIGINS:
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
+        expose_headers=["X-Total-Count"]
     )
 
 app.include_router(api_router, prefix=settings.API_V1_STR)

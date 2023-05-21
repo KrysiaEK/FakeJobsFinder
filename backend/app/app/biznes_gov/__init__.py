@@ -1,0 +1,1 @@
+from .api import get_by_name, get_by_nip, get_by_regon

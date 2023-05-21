@@ -1,7 +1,7 @@
 """Job offers
 
 Revision ID: 1f6d8266ae60
-Revises: 
+Revises: 8188d671489a
 Create Date: 2023-05-20 18:42:25.748150
 
 """
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = '1f6d8266ae60'
-down_revision = None
+down_revision = '8188d671489a'
 branch_labels = None
 depends_on = None
 
