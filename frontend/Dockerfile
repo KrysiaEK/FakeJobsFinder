@@ -8,11 +8,14 @@ RUN npm run build
 EXPOSE 80
 
 FROM build AS run-dev
+COPY --from=build /app/build /app/build
 CMD ["serve", "-s", "-p", "80", "build"]
 
 FROM build AS run-start
 ENV NODE_ENV=production
+COPY --from=build /app/build /app/build
 CMD ["serve", "-s", "-p", "80", "build"]
 
 FROM build as run-minimal
+COPY --from=build /app/build /app/build
 CMD ["serve", "-s", "-p", "80", "build"]
